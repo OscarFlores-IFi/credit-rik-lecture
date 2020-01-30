@@ -47,21 +47,21 @@ Ask yourself the following:
 1. Change to the master branch: 
     * `git checkout master`
 1. Fetch latest updates from the upstream:
-    * `git fetch master`
+    * `git fetch upstream`
 1. Merge into your master branch: 
     * `git merge upstream/master master`
-    * ``
+    * `git push origin master`
     
 **Create** a new working branch for a classwork or homework: 
 
 1. Pull possible changes on your `solutions` branch:
     * Checkout: `git checkout solutions`
-    * Pull: `git pull origin solutions`
+    * Pull: `git pull origin solutions` si no funciona cambiar por push
 1. Create the new branch from master: 
     * `git checkout master`
-    * `git checkout -b [branch]`
+    * `git checkout -b [branch]` en este caso git-cheat-sheet
 1. Merge your `solutions` branch to ensure compatibility:
-    * Merge: `git merge solutions` origin/solutions es posible
+    * Merge: `git merge origin/solutions [branch]` origin/solutions es posible
     * Solve conflicts if needed.
 
 **Sync** current branch to Github:
