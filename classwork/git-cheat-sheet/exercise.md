@@ -58,5 +58,5 @@ Assuming you are on a repository with two remotes:
 How can you update the `master` branch from `origin` with the latest changes from the `upstream` `master` branch? 
 
 * `git fetch upstream` 
-* `git merge upstream/master master`
-* `git push origin/master`
+* `git merge upstream/master`
+* `git push origin`
