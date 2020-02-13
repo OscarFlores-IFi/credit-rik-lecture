@@ -29,46 +29,47 @@ Please check your current workspace and identify if there's something to add/com
 Ask yourself the following: 
 
 1. On which branch are you at? 
-    * ``
+    * `git branch`
 1. Is there anything I should add or commit?
-    * ``
+    * `git status`
 1. Before using `git add` or `git commit` verify if the current branch is the one you should be uploading those changes.
-    * Change with: ``
-    * Create with: ``
+    * Change with: `git checkout [branch]`
+    * Create with: `git checkout -b [branch]`
 1. If needed, add/commit/push to the branch!
-    * Add: ``
-    * Commit: ``
-    * Push: ``
+    * Add: `git add [file-path]`
+    * Commit: `git commit -m "message"`
+    * Push: `git push origin [branch]` in this case masterg
     
 ## Update procedure
 
 **Update** your repo with the latest changes: 
 
 1. Change to the master branch: 
-    * ``
+    * `git checkout master`
 1. Fetch latest updates from the upstream:
-    * ``
+    * `git fetch upstream`
 1. Merge into your master branch: 
-    * ``
-    * ``
+    * `git merge upstream/master master`
+    * `git push origin master`
     
 **Create** a new working branch for a classwork or homework: 
 
 1. Pull possible changes on your `solutions` branch:
-    * Checkout: ``
-    * Pull: ``
+    * Checkout: `git checkout solutions`
+    * Pull: `git pull origin solutions` si no funciona cambiar por push
 1. Create the new branch from master: 
-    * ``
-    * ``
+    * `git checkout master`
+    * `git checkout -b [branch]` en este caso git-cheat-sheet
 1. Merge your `solutions` branch to ensure compatibility:
-    * Merge: ``
+    * Merge: `git merge origin/solutions [branch]` origin/solutions es posible
     * Solve conflicts if needed.
 
 **Sync** current branch to Github:
 
 1. Add and commit the relevant changes: 
-    * Add: ``
-    * Commit: ``
+    * Add: `git add [file-path]`
+    * Commit: `git commit -m "message"`
 1. Push to the remote:
-    * Push: ``
+    * Push: `git push [branch]`
 1. Create a PR on github from `[branch]` to `solutions`!
+    * 
