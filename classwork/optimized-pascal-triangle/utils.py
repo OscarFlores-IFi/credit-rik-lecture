@@ -16,6 +16,19 @@ def timeit(logger):
 def _lazy_wrapper(value):
     return lambda: value
 
+def caching(func):
+    cache = {}
+
+    @functools.wraps(func)
+    def wrapper(self, **kwargs):
+        key = hash(frozenset(kwargs.items()))
+        if key in cache:
+            return cache[key]
+        cache[key] = func(self, **kwargs)
+        return wrapper(self, **kwargs)
+    return wrapper
+
+
 class TriangleBuilder:
     CACHE = {}
 

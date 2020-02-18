@@ -1,13 +1,15 @@
 import fire
 import logging
 
-from utils import timeit
+from utils import timeit, TriangleBuilder, caching
 
 logger = logging.getLogger(__name__)
 
 
 class Main(object):
+    _builder = TriangleBuilder
 
+#    @caching
     def _get_element(self, i: int, j: int):
         return 1 if (j == 0 or j>=i) else \
             self._get_element(i=i-1, j=j) + self._get_element(i = i-1, j = j-1)
