@@ -47,15 +47,16 @@ Ask yourself the following:
 1. Change to the master branch: 
     * `git checkout master`
 1. Fetch latest updates from the upstream:
-    * `git fetch master`
+    * `git fetch upstream`
 1. Merge into your master branch: 
     * `git merge upstream/master master`
-    * ``
+    * `git push origin master`
     
 **Create** a new working branch for a classwork or homework: 
 
 1. Pull possible changes on your `solutions` branch:
     * Checkout: `git checkout solutions`
+
     * Pull: `git pull origin solutions`
 1. Create the new branch from master: 
     * `git checkout master`

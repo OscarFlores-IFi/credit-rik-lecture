@@ -15,6 +15,8 @@ Consider the following github repository:
 How would you clone the repository and change to the `stage` branch? Add your commands:
 
 * `git clone https://github.com/RHDZMOTA/bitso-market-consumer`
+* `git checkout stage`
+
 
 ## B - Git status
 
@@ -48,7 +50,6 @@ You are currently on `master`. Create a branch from `develop` named `deploy` and
 * `git checkout -b deploy`
 * `git merge deploy/master`
 
-
 ## D - Sync from remote
 
 Assuming you are on a repository with two remotes: 
@@ -58,3 +59,4 @@ Assuming you are on a repository with two remotes:
 How can you update the `master` branch from `origin` with the latest changes from the `upstream` `master` branch? 
 
 * `git pull upstream origin`
+
