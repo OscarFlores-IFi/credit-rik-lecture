@@ -18,7 +18,8 @@ class Main(object):
     @timeit(logger)
     def download(filename=APP_INDUSTRY_FILE, target_url=APP_TARGET_URL):
         logging.info("Starting download procedure.")
-        pass
+        sic = SIC.from_url(target_url)
+        sic.save(filename=filename)
 
     @timeit(logger)
     @pretty_print(logger)
