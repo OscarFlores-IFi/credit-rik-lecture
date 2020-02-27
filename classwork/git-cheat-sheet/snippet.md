@@ -56,12 +56,13 @@ Ask yourself the following:
 
 1. Pull possible changes on your `solutions` branch:
     * Checkout: `git checkout solutions`
-    * Pull: `git pull origin solutions` si no funciona cambiar por push
+
+    * Pull: `git pull origin solutions`
 1. Create the new branch from master: 
     * `git checkout master`
-    * `git checkout -b [branch]` en este caso git-cheat-sheet
+    * `git checkout -b [branch]`
 1. Merge your `solutions` branch to ensure compatibility:
-    * Merge: `git merge origin/solutions [branch]` origin/solutions es posible
+    * Merge: `git merge solutions` origin/solutions es posible
     * Solve conflicts if needed.
 
 **Sync** current branch to Github:

@@ -17,6 +17,7 @@ How would you clone the repository and change to the `stage` branch? Add your co
 * `git clone https://github.com/RHDZMOTA/bitso-market-consumer`
 * `git checkout stage`
 
+
 ## B - Git status
 
 Consider the following output from the `git status` command:
@@ -47,7 +48,7 @@ Assuming you are on a repository that contains the following branches:
 You are currently on `master`. Create a branch from `develop` named `deploy` and merge into `master`.
 * `git checkout develop`
 * `git checkout -b deploy`
-* `git merge deploy master`  'git checkout master' y 'git merge deploy'
+* `git merge deploy/master`
 
 ## D - Sync from remote
 
@@ -57,7 +58,5 @@ Assuming you are on a repository with two remotes:
 
 How can you update the `master` branch from `origin` with the latest changes from the `upstream` `master` branch? 
 
-* `git checkout master`
-* `git fetch upstream` 
-* `git merge upstream/master`
-* `git push origin`
+* `git pull upstream origin`
+
