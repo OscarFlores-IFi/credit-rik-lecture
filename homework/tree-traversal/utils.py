@@ -16,6 +16,9 @@ def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
         return wrapper
     return decorator
 
-
-def sum_levels(parent):
-    pass
+result = {}
+def sum_levels(parent,level = 0):
+    result[level] = result.get(level,0) + parent.value
+    for child in parent.children:
+        sum_levels(child, level=level + 1)
+    return result
