@@ -1,5 +1,6 @@
 import functools
 import json
+import logging
 
 
 def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
@@ -15,3 +16,22 @@ def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
                 raise  # Re-throw exception to fail the program execution with stack-trace.
         return wrapper
     return decorator
+
+
+
+@pretty_print(logging.getLogger(__name__))
+def flatten_dict(dict):
+    res = {}
+
+    def flatten(x, name=''):
+        if isinstance(x, dict):
+            for i in x.keys():
+                flatten(x[i], name + i + '.')
+        elif isinstance(x, list):
+            for i in range(len(x)):
+                flatten(x[i], name + str(i) + '.')
+        else:
+            res[name[:-1]] = x
+
+    flatten(dict)
+    return res
