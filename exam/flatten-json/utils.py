@@ -1,6 +1,5 @@
 import functools
 import json
-import logging
 
 
 def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
@@ -19,8 +18,7 @@ def pretty_print(logger, serializer_function=lambda obj: obj.__dict__):
 
 
 
-@pretty_print(logging.getLogger(__name__))
-def flatten_dict(dict):
+def flatten_dict(var):
     res = {}
 
     def flatten(x, name=''):
@@ -33,5 +31,5 @@ def flatten_dict(dict):
         else:
             res[name[:-1]] = x
 
-    flatten(dict)
+    flatten(var)
     return res
