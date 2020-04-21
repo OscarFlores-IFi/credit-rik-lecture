@@ -31,11 +31,12 @@ def train(data_path, target_column, add_intercept = '', save_path = ''):
             'predictors' : [i for i in x.columns],
             'weights' : [i for i in w]
             }
-    print(data)
+
     if save_path:
         with open(save_path, 'w') as file:
             json.dump(data, file)
 
+    print(data)
     return data
 
 def score(model_path, data_path = None, prediction = 'estimation', save_output = ''):
@@ -54,7 +55,6 @@ def score(model_path, data_path = None, prediction = 'estimation', save_output =
     data = pd.read_csv(data_path)
     x = data.drop([model['target_column']],axis=1)
     y_hat = x.dot(np.array(model['weights']))
-    print(data)
 
     if prediction:
         data[prediction] = y_hat
@@ -62,7 +62,8 @@ def score(model_path, data_path = None, prediction = 'estimation', save_output =
     if save_output:
         data.to_csv(save_output)
 
-    pass
+    print(data)
+    return data
 
 
 
