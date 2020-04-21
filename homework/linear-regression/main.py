@@ -1,13 +1,35 @@
+import logging
+import fire
+import os
+
 from models import *
 
-data_path = 'data/weather.csv'
-target_column = 'max_temp'
-train_linear_regression(data_path,target_column,add_intercept='intercept', save_path='model-example.json')
+logger = logging.getLogger(__name__)
 
-model_path = 'model-example.json'
-score_linear_regression(model_path,
-                        data_path = 'data/weather.csv',
-                        prediction = 'estimation',
-                        save_output = 'data/out.csv')
+class Main(object):
+
+    @staticmethod
+    def train_linear_regression(data_path,target_column,add_intercept='intercept', save_path='model-example.json'):
+        return train(data_path,target_column,add_intercept, save_path)
+
+    @staticmethod
+    def score_linear_regression(model_path,
+                            data_path = 'data/weather.csv',
+                            prediction = 'estimation',
+                            save_output = 'data/out.csv'):
+        return score(model_path, data_path, prediction, save_output)
 
 
+    data_path = 'data/weather.csv'
+    target_column = 'max_temp'
+    train_linear_regression(data_path,target_column,add_intercept='intercept', save_path='model-example.json')
+
+    model_path = 'model-example.json'
+    score_linear_regression(model_path,
+                            data_path = 'data/weather.csv',
+                            prediction = 'estimation',
+                            save_output = 'data/out.csv')
+
+if __name__ == "__main__":
+    logging.basicConfig(level=os.environ.get("APP_LOG_LEVEL",default="INFO"))
+    fire.Fire(Main)

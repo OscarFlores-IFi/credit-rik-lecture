@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 
-def train_linear_regression(data_path, target_column, add_intercept = '', save_path = ''):
+def train(data_path, target_column, add_intercept = '', save_path = ''):
     """
     Debug:
     data_path = 'data/weather.csv' or 'data/weight-height.csv'
@@ -38,7 +38,7 @@ def train_linear_regression(data_path, target_column, add_intercept = '', save_p
 
     return data
 
-def score_linear_regression(model_path, data_path = None, prediction = 'estimation', save_output = ''):
+def score(model_path, data_path = None, prediction = 'estimation', save_output = ''):
     """
     Debug:
     model_path = 'model-example.json'
