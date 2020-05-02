@@ -1,5 +1,5 @@
 import json
-import numpy as np
+import jax.numpy as np
 import pandas as pd
 
 
@@ -65,20 +65,20 @@ def train(data_path, target_column, add_intercept='', save_path=''):
         data[add_intercept] = np.ones(len(data))
     y = data[target_column].values
     x = data.drop([target_column], axis=1).values
-    w = np.linalg.pinv(((x.T).dot(x)).values).dot(x.T).dot(y)  # calculo de pesos algebraicamente.
+    w = np.linalg.pinv(((x.T).dot(x))).dot(x.T).dot(y)  # calculo de pesos algebraicamente.
 
     if add_intercept:
         data = {
             'target_column': target_column,
             'add_intercept': w[-1].tolist(),
-            'predictors': [i for i in x.columns if i != target_column],
+            'predictors': [i for i in data.columns if i != target_column],
             'weights': w[:-1].tolist()
         }
     else:
         data = {
             'target_column': target_column,
             'add_intercept': 0,
-            'predictors': [i for i in x.columns if i != target_column],
+            'predictors': [i for i in data.columns if i != target_column],
             'weights': [i for i in w]
         }
 
@@ -94,7 +94,6 @@ def score(model_path, data_path=None, prediction='estimation', save_output=''):
     Debug:
     model_path = 'model-example.json'
     data_path = 'data/weather.csv' or 'data/weight-height.csv'
-    target_column = 'max_temp' or 'weight'
     prediction = 'estimation'
     save_output = 'data/out.csv'
     """

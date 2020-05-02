@@ -1,1 +1,1 @@
-{"target_column": "max_temp", "add_intercept": -7.325262870763579, "predictors": ["min_temp", "yr", "mo", "da"], "weights": [0.9215156917920748, 0.4195792122665015, -0.05497122396881084, -0.002088207042993424]}
+{"target_column": "max_temp", "add_intercept": -7.315834045410156, "predictors": ["min_temp", "yr", "mo", "da", "intercept"], "weights": [0.9215150475502014, 0.41951417922973633, -0.05497898906469345, -0.0020872093737125397]}
