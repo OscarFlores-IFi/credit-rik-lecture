@@ -3,7 +3,9 @@ import logging
 import pickle
 import string
 from typing import Callable, List, Optional
+from models.finance import Amortization
 
+import random
 import jax.numpy as np
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -78,3 +80,16 @@ def get_spreadsheet_column_names(column_index_max: int, ref_cols: Optional[List[
         return ref_cols[:column_index_max]
     cols = ref_cols + [col + new_col for col in ref_cols for new_col in string.ascii_uppercase]
     return get_spreadsheet_column_names(column_index_max, ref_cols=cols)
+
+
+def search(amount, n, prob_of_default: float, loss_given_default: float, desired_rate : float = 0):
+    x1, x2, x3 = [random.random() for _ in range(3)]
+    y1 = (Amortization(amount, x1, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
+    y2 = (Amortization(amount, x2, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
+    y3 = (Amortization(amount, x3, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
+
+    A = np.array([[x1**2, x1, 1], [x2**2, x2, 1], [x3**2, x3, 1]])
+    b = np.array([y1, y2, y3])
+    z = np.linalg.solve(A, b)
+
+    return np.abs(z[1]/2/z[0])
