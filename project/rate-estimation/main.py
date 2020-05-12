@@ -39,7 +39,7 @@ class Main:
                            probability_of_default : float, loss_given_default : float,
                            client_min_rate : float, client_max_rate : float, search_samples : int,
                            save : str = '', show = False):
-        rate = search(loan_amount, loan_terms, probability_of_default, loss_given_default, desired_rate=loan_marr)
+        rate = search(loan_amount, loan_terms, probability_of_default, loss_given_default, desired_rate=loan_marr, sample_size=search_samples)
         df = Amortization(loan_amount, rate, loan_terms).get_enriched_table(probability_of_default, loss_given_default)
         annuity = df['Annuity'][loan_terms]
 
