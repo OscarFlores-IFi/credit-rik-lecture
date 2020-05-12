@@ -134,3 +134,6 @@ dmypy.json
 
 # Ignore solutions
 *-sol/
+
+credentials.json
+token.pickle
