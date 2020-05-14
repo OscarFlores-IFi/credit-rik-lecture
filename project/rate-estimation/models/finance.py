@@ -1,8 +1,8 @@
 from typing import Callable, List, Optional
 
-# import jax.numpy as np
 import pandas as pd
 import numpy as np
+
 
 class Amortization:
 
@@ -21,7 +21,7 @@ class Amortization:
             P = annuity - I
             B -= P
             table[t, :] = [t, B, P, I, annuity]
-        table_df = pd.DataFrame(table, columns=['time', 'Balance', 'Payment', 'Interest', 'Annuity']).set_index('time')
+        table_df = pd.DataFrame(table, columns=['time', 'Balance', 'Payment', 'Interest', 'Annuity'])
 
         return table_df
 
@@ -57,7 +57,7 @@ class Amortization:
             else:
                 prob = prob_of_default * (1 - prob_of_default) ** t
             table[t, :] = [t, B, P, I, annuity, irr, EL, prob]
-        table_df = pd.DataFrame(table, columns=['time', 'Balance', 'Payment', 'Interest', 'Annuity', 'IRR', 'Expected Loss', 'Prob_default']).set_index('time')
+        table_df = pd.DataFrame(table, columns=['time', 'Balance', 'Payment', 'Interest', 'Annuity', 'IRR', 'Expected Loss', 'Prob_default'])
         return table_df
 
     def expected_irr(self, prob_of_default: float, loss_given_default: float) -> float:
@@ -65,5 +65,4 @@ class Amortization:
         irr = df['IRR']
         prob = df['Prob_default']
         return np.sum([irr[i]*prob[i] for i in range(len(irr))])
-
 

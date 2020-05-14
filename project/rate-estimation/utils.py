@@ -5,8 +5,8 @@ import string
 from typing import Callable, List, Optional
 from models.finance import Amortization
 
-from numpy import random
-import jax.numpy as np
+import random
+import numpy as np
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -82,15 +82,11 @@ def get_spreadsheet_column_names(column_index_max: int, ref_cols: Optional[List[
     return get_spreadsheet_column_names(column_index_max, ref_cols=cols)
 
 
-def search(amount, n, prob_of_default: float, loss_given_default: float, desired_rate : float = 0, sample_size: int = 100):
-    def calcular_y(x):
-        return (Amortization(amount, x, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
-    x = random.random((sample_size,))
-    y = np.array([calcular_y(i) for i in x])
-    sort = np.argsort(y)
-
-    [y1, y2, y3] = y[[sort[0:3]]]
-    [x1, x2, x3] = x[[sort[0:3]]]
+def search(amount, n, prob_of_default: float, loss_given_default: float, desired_rate : float = 0):
+    x1, x2, x3 = [random.random() for _ in range(3)]
+    y1 = (Amortization(amount, x1, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
+    y2 = (Amortization(amount, x2, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
+    y3 = (Amortization(amount, x3, n).expected_irr(prob_of_default, loss_given_default)-desired_rate)**2
 
     A = np.array([[x1**2, x1, 1], [x2**2, x2, 1], [x3**2, x3, 1]])
     b = np.array([y1, y2, y3])
