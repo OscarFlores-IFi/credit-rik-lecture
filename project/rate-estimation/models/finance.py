@@ -46,17 +46,23 @@ class Amortization:
             I = 0
             P = 0
             irr = 0
+
             if t > 0:
                 I = B * self.rate
                 P = annuity - I
                 B -= P
                 irr = IRR([-self.amount] + [annuity for _ in range(t)])
             EL = B * loss_given_default * prob_of_default
+
             if t == self.n:
-                prob = 1-table[:,-1].sum()
+                prob = 1 - table[:, -1].sum()
             else:
                 prob = prob_of_default * (1 - prob_of_default) ** t
-            table[t, :] = [t, B, P, I, annuity, irr, EL, prob]
+
+            if t > 0:
+                table[t, :] = [t, B, P, I, annuity, irr, EL, prob]
+            else:
+                table[t, :] = [t, B, P, I, 0, irr, EL, prob]
         table_df = pd.DataFrame(table, columns=['time', 'Balance', 'Payment', 'Interest', 'Annuity', 'IRR', 'Expected Loss', 'Prob_default'])
         return table_df
 
@@ -64,5 +70,8 @@ class Amortization:
         df = Amortization.get_enriched_table(self, prob_of_default, loss_given_default)
         irr = df['IRR']
         prob = df['Prob_default']
+        print(irr,prob)
         return np.sum([irr[i]*prob[i] for i in range(len(irr))])
 
+print(Amortization(10000,0.2761,5).get_enriched_table(0.2,0.5))
+print(Amortization(10000,0.4861,5).get_enriched_table(0.2,0.5))

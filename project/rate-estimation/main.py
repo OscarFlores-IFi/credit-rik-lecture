@@ -28,7 +28,7 @@ class Main:
                            probability_of_default: float, loss_given_default: float,
                            client_min_rate : float, client_max_rate : float, search_samples : int,
                            save: str = '', show=False):
-        rate = search(loan_amount, loan_terms, probability_of_default, loss_given_default, desired_rate=loan_marr)
+        rate = search(loan_amount, loan_terms, probability_of_default, loss_given_default, desired_rate=0)
         df = Amortization(loan_amount, rate, loan_terms).get_enriched_table(probability_of_default, loss_given_default)
         annuity = df['Annuity'][loan_terms]
 
@@ -48,7 +48,7 @@ class Main:
     @staticmethod
     def loan_request_cloud(sheet_id: str, save="", show=False):
         table = ConfigTable(sheet_id)
-        rate = search(table.loan_amount, table.loan_terms, table.probability_of_default, table.loss_given_default, desired_rate=table.loan_marr)
+        rate = search(table.loan_amount, table.loan_terms, table.probability_of_default, table.loss_given_default, desired_rate=0)
         df = Amortization(table.loan_amount, rate, table.loan_terms).get_enriched_table(table.probability_of_default, table.loss_given_default)
         annuity = df['Annuity'][table.loan_terms]
 
